@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
+import { json } from 'react-router-dom';
 
 
 const RegistroPersonas = () => {
-    const apiKey = localStorage.getItem['apiKey'];
-    const idUser = localStorage.getItem['id'];
+    const apiKey = localStorage.getItem('apiKey');
+    const idUser = localStorage.getItem('id');
+
+    //datos para llenar pagina
     const [departamentos, setDepartamentos] = useState([]);
     const [ciudades, setCiudades] = useState([]);
     const [ocupaciones, setOcupaciones] = useState([]);
 
+    //datos para mandar en solicitud
     const [namePersona, setNamePersona] = useState("");
     const [departamentoPersona, setDepartamentoPersona] = useState("");
     const [ciudadPersona, setCiudadPersona] = useState("");
@@ -30,12 +34,12 @@ const RegistroPersonas = () => {
         setOcupacionPersona(event)
     }
     //departamentos
-    useEffect(() => {
 
+    const getDepartamentos = () => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("apikey", apiKey);
-        myHeaders.append("iduser", idUser);
+        myHeaders.append("apikey", {apiKey});
+        myHeaders.append("iduser", {idUser});
 
         var urlencoded = new URLSearchParams();
 
@@ -46,16 +50,13 @@ const RegistroPersonas = () => {
             redirect: 'follow'
         };
 
-        fetch("https://censo.develotion.com/|/departamentos.php", requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                console.log(result)
-                setDepartamentos(result);
-            })
+        fetch("https://censo.develotion.com//departamentos.php", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
             .catch(error => console.log('error', error));
-    }, [])
-
+    }
     const getCiudades = (event) => {
+        event.preventDefault();
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("apikey", apiKey);
@@ -71,15 +72,15 @@ const RegistroPersonas = () => {
         };
 
         fetch(`https://censo.develotion.com/|/ciudades.php?idDepartamento=${event.id}`, requestOptions)
-            .then(response => response.json())
+            .then(response => response.text())
             .then(result => {
-                setCiudades(result);
+                result = JSON.parse(result)
+                setCiudades(result['ciudades']);
                 console.log(result);
             })
             .catch(error => console.log('error', error));
     }
-    //ocupaciones
-    useEffect(() => {
+    const getOcupaciones = () => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("apikey", apiKey);
@@ -90,25 +91,32 @@ const RegistroPersonas = () => {
         var requestOptions = {
             method: 'GET',
             headers: myHeaders,
-            body: urlencoded,
+            // body: urlencoded,
             redirect: 'follow'
         };
 
         fetch("https://censo.develotion.com/|/ocupaciones.php", requestOptions)
             .then(response => response.text())
             .then(result => {
-                setOcupaciones(result);
+                result = JSON.parse(result)
+                setOcupaciones(result['ocupaciones']);
                 console.log(result)
             })
             .catch(error => console.log('error', error));
-    }, [])
+    }
+
+    useEffect(() => {
+        getDepartamentos();
+        getOcupaciones();
+    })
+
 
     const registroPersona = (event) => {
         event.preventDefault();
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("apikey", apiKey);
-        myHeaders.append("iduser", idUser);
+        myHeaders.append("apikey", { apiKey });
+        myHeaders.append("id", { idUser });
 
         var raw = JSON.stringify({
             "idUsuario": idUser,
@@ -135,29 +143,29 @@ const RegistroPersonas = () => {
 
     return (
         <>
-            <form onSubmit={registroPersona}>
-                <label for='namePersona'>Nombre</label>
+            {/* <form onSubmit={registroPersona} onLoad={getDepartamentos}>
+                <label htmlFor='namePersona'>Nombre</label>
                 <input type='text' placeholder='Ingrese nombre' onChange={name} required />
 
-                <label for='departamentoPersona'>Departamento</label>
-                <select id='departamentoPersona' onChange={() => { getCiudades; departamento }}>
-                    {departamentos.map(dep => <option key={dep.id} value={dep.id} onSelect={getCiudades} onChange={getCiudades}>{dep.nombre}</option>)}
+                <label htmlFor='departamentoPersona'>Departamento</label>
+                <select id='departamentoPersona' onChange={departamento}>
+                    {departamentos.map(dep => <option key={dep.id} value={dep.id} onSelect={getCiudades} >{dep.nombre}</option>)}
                 </select>
 
-                <label for='ciudadPersona'>Ciudad</label>
+                <label htmlFor='ciudadPersona'>Ciudad</label>
                 <select id='ciudadPersona' onChange={ciudad}>
                     {ciudades.map(ciudad => <option key={ciudad.id} value={ciudad.id}>{ciudad.nombre}</option>)}
                 </select>
 
-                <label for='nacimientoPersona'>Nacimiento</label>
+                <label htmlFor='nacimientoPersona'>Nacimiento</label>
                 <input id='nacimientoPersona' type='date' onChange={nacimiento} required />
 
-                <label for='ocupacionPersona'>Ocupacion</label>
+                <label htmlFor='ocupacionPersona'>Ocupacion</label>
                 <select id='ocupacionPersona' onChange={ocupacion}>
                     {ocupaciones.map(o => <option key={o.id} value={o.id}>{o.nombre}</option>)}
                 </select>
                 <button type='submit'>Censar Persona</button>
-            </form>
+            </form> */}
         </>
     )
 }

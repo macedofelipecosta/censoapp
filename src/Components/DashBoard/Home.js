@@ -2,11 +2,12 @@ import React from 'react'
 import { Navigate } from "react-router-dom";
 
 
+
 const Home = () => {
 
   const apiKey = localStorage.getItem('apiKey');
 
-  if (!apiKey) {
+  if (!apiKey || apiKey === 'undefined') {
 
     return (
       <Navigate to='/'></Navigate>
@@ -21,8 +22,13 @@ const Home = () => {
 
   return (
     <>
+      
+
+
+
+
       <div>Hay apiKey</div>
-      <button onClick={CerrarSesion }>Cerrar Sesion</button>
+      <button onClick={CerrarSesion}>Cerrar Sesion</button>
     </>
   );
 }

@@ -6,7 +6,8 @@ import Nacimiento from './Nacimiento'
 import Ocupacion from './Ocupacion'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import agregarDepartamentos from '../'
+
+
 const RegistroPersona = () => {
     
     const dispatch = useDispatch();

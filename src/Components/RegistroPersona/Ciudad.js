@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
-const Ciudad = () => {
+const Ciudad = ({obtenerCiudad}) => {
+
+    const campo = useRef(null);
+    const tomarDato = () => {
+      let dep = campo.current.value;
+      obtenerCiudad(dep);
+    }
+
     return (
         <div className="form-floating">
-            <select id="floatingCiudad" className="form-control" required>
-                <option value="" selected>Ciudades</option>
+            <select id="floatingCiudad" className="form-control" required ref={campo} onChange={tomarDato}>
+                <option value="" defaultValue={'Ciudades'}>Ciudades</option>
                 <option>Montevideo</option>
                 <option>Atlántida</option>
             </select>

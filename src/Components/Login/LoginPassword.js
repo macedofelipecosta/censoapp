@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
-const LoginPassword = () => {
+const LoginPassword = ({ obtenerPassword }) => {
 
+  const campo = useRef(null);
+  const tomarDato = () => {
+    let pass = campo.current.value;
+    obtenerPassword(pass);
+  }
 
   return (
     <div className="form-floating">
-            <input type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
-            <label htmlFor="floatingPassword">Password</label>
-          </div>
+      <input type="password" className="form-control" id="floatingPassword" placeholder="Password" ref={campo} onChange={tomarDato} />
+      <label htmlFor="floatingPassword">Password</label>
+    </div>
   )
 }
 

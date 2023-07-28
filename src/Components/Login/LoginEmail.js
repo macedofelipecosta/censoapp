@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
-const LoginEmail = () => {
+const LoginEmail = ({ obtenerUsuario }) => {
+
+  const campo = useRef(null);
+  const tomarDato = () => {
+    let usr = campo.current.value;
+    obtenerUsuario(usr);
+  }
+
   return (
-    <div class="form-floating">
-            <input type="text" className="form-control" id="floatingInput" placeholder="name@example.com"/>
-            <label htmlFor="floatingInput">Usuario</label>
-          </div>
+    <div className="form-floating">
+      <input type="text" className="form-control" id="floatingInput" ref={campo} placeholder="name@example.com" onChange={tomarDato} />
+      <label htmlFor="floatingInput">Usuario</label>
+    </div>
   )
 }
 

@@ -6,6 +6,8 @@ import Nacimiento from './Nacimiento'
 import Ocupacion from './Ocupacion'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import guardarDepartamentos from '../Features/departamentoSlice.js'
+import { guardarOcupaciones } from '../Features/ocupacionesSlice'
 
 
 const RegistroPersona = () => {
@@ -22,9 +24,11 @@ const RegistroPersona = () => {
     const [nacimiento, setNacimiento] = useState("")
     const [ocupacion, setOcupacion] = useState("")
 
-    const [departamentos, setDepartamentos] = useState([])
+    const departamentos=useSelector(state=>state.departamentos.departamentos)
+    // const [departamentos, setDepartamentos] = useState([])
     const [ciudades, setCiudades] = useState([])
-    const [ocupaciones, setOcupaciones] = useState([])
+    // const [ocupaciones, setOcupaciones] = useState([])
+    const ocupaciones=useSelector(state=>state.ocupaciones.ocupaciones)
 
     useEffect(() => {
         obtenerDepartamentos();
@@ -51,7 +55,8 @@ const RegistroPersona = () => {
             .then(result => {
 
                 const dep = JSON.parse(result)
-                setDepartamentos(dep['departamentos'])
+                dispatch(guardarDepartamentos(dep['departamentos']))
+                // setDepartamentos(dep['departamentos'])
                 console.log(dep['departamentos'])
                 // console.log(result)
             })
@@ -101,7 +106,8 @@ const RegistroPersona = () => {
             .then(response => response.text())
             .then(result => {
                 let ocu = JSON.parse(result);
-                setOcupaciones(ocu['ocupaciones']);
+                dispatch(guardarOcupaciones(ocu['ocupaciones']))
+                // setOcupaciones(ocu['ocupaciones']);
                 console.log(ocu['ocupaciones'])
                 // console.log(result)
             })

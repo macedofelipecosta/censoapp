@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    departamento: []
+    departamentos: []
 }
 
 
@@ -14,7 +14,7 @@ export const departamentoSlice = createSlice({
     initialState,
     reducers: {
         guardarDepartamentos: (state, action) => {
-            state.departamentos = action.payload
+            state.departamentos.push(action.payload)
         }
     }
 })

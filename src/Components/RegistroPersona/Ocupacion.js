@@ -12,7 +12,7 @@ const Ocupacion = ({obtenerOcupacion, ocupaciones  }) => {
     return (
         <div className="form-floating">
             <select id="floatingOcupacion" className="form-control" required ref={campo} onChange={tomarDato}>
-                <option defaultValue={'Ocupaciones'}>Ocupaciones</option>
+                <option defaultValue={'noNe'}>Ocupaciones</option>
                 {ocupaciones.map(o=><option key={o.id} id={o.id} value={o.id}>{o.ocupacion}</option>)}
             </select>
             <label htmlFor="floatingOcupacion">Ocupación</label>

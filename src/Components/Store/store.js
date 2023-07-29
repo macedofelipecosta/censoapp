@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import departamentoReducer from '../Features/departamentoSlice'
+import departamentosReducer from '../Features/departamentoSlice'
 import ocupacionesReducer from '../Features/ocupacionesSlice.js'
+import ciudadesReducer from '../Features/ciudadSlice.js'
 
 export const store=configureStore({
     reducer:{
-        departamentos:departamentoReducer,
-        ocupaciones:ocupacionesReducer
+        departamentos:departamentosReducer,
+        ocupaciones:ocupacionesReducer,
+        ciudades:ciudadesReducer
     }
 })

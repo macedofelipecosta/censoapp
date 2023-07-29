@@ -1,20 +1,16 @@
 import React, { useRef } from 'react'
 
-const Departamento = ({obtenerDepartamento, departamentos}) => {
+const Departamento = ({id, nombre, obtenerDepartamentoHijo}) => {
+
 
     const campo = useRef(null);
     const tomarDato = () => {
-      let dep = campo.current.value;
-      obtenerDepartamento(dep);
+        let dep = campo.current.value;
+        obtenerDepartamentoHijo(dep);
     }
+    
     return (
-        <div className="form-floating">
-            <select id="floatingDepartamento" className="form-control" required onChange={tomarDato} ref={campo}>
-                <option value="" defaultValue={'Departamentos'}> Departamentos</option>
-                {departamentos.map(dep=><option key={dep.id} id={dep.id} value={dep.id}>{dep.nombre}</option>)}
-            </select>
-            <label htmlFor="floatingDepartamento">Departamento</label>
-        </div>
+                <option id={id} value={id} ref={campo} onChange={tomarDato}>{nombre}</option>    
     )
 }
 

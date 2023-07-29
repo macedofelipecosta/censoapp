@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-const Ocupacion = ({obtenerOcupacion, ocupaciones  }) => {
+const Ocupacion = ({id, ocupacion, obtenerOcupacion}) => {
 
 
     const campo = useRef(null);
@@ -10,13 +10,7 @@ const Ocupacion = ({obtenerOcupacion, ocupaciones  }) => {
     }
 
     return (
-        <div className="form-floating">
-            <select id="floatingOcupacion" className="form-control" required ref={campo} onChange={tomarDato}>
-                <option defaultValue={'noNe'}>Ocupaciones</option>
-                {ocupaciones.map(o=><option key={o.id} id={o.id} value={o.id}>{o.ocupacion}</option>)}
-            </select>
-            <label htmlFor="floatingOcupacion">Ocupación</label>
-        </div>
+        <option id={id} value={id} ref={campo} onChange={tomarDato} >{ocupacion}</option>
     )
 }
 

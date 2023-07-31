@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react'
 import LoginEmail from './LoginEmail'
 import LoginPassword from './LoginPassword'
 import { Link, useNavigate } from 'react-router-dom'
-
+import ModalError from './ModalError'
 
 
 
 const Login = () => {
-  const apiKey = localStorage.getItem['apiKey'];
   const navigate = useNavigate();
 
   const [usuario, setUsuario] = useState("")
   const [password, setPassword] = useState("")
-  const [userError, setUserError] = useState(false)
+  const [errorLogin, setErrorLogin] = useState(false)
 
   const obtenerUsuario = (user) => {
     setUsuario(user);
@@ -21,6 +20,14 @@ const Login = () => {
     setPassword(passWord);
   }
 
+  useEffect(() => {
+    verificarSesion();
+  },[] )
+
+  const verificarSesion=()=>{
+    if (localStorage.length==2) navigate('/Home');
+  }
+  
 
   const InicioSesion = (event) => {
     event.preventDefault();
@@ -52,7 +59,7 @@ const Login = () => {
           navigate('/Home')
         } else {
           localStorage.clear();
-          alert('Usuario o contraseña incorrectos!')
+          setErrorLogin(true);
         }
 
       })
@@ -72,7 +79,7 @@ const Login = () => {
       </form>
       <br />
       <Link to='/RegistroCensista'><button className="btn btn-primary w-100 py-2">Registrar Censista</button></Link>
-      
+      {errorLogin && <ModalError/>}
     </main>
     
   )

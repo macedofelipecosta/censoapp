@@ -9,6 +9,7 @@ import Login from './Components/Login/Login.js';
 import RegistroCensista from './Components/RegistroCensista/RegistroCensista.js';
 import Home from './Components/DashBoard/Home.js';
 import RegistroPersona from "./Components/RegistroPersona/RegistroPersona.js";
+import ListadoPersonas from "./Components/Personas/ListadoPersonas";
 import NotFound from './Components/NotFound.js';
 
 
@@ -26,6 +27,8 @@ const App = () => {
             <Route path="/Home" element={<Home />} />
 
             <Route path="/RegistroPersona" element={<RegistroPersona />} />
+
+            <Route path="/ListadoPersonas" element={<ListadoPersonas/>}/>
 
             <Route path="*" element={<NotFound />} />
           </Routes>

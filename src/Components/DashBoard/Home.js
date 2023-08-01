@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import { guardarDepartamentos } from '../Features/departamentoSlice'
 import { guardarTodas } from '../Features/ciudadSlice.js'
 import { guardarOcupaciones } from '../Features/ocupacionesSlice.js'
 import { guardarPersonas } from '../Features/personaSlice';
-import GraficaDash from './GraficaDash';
+
+
+import GraficaDash from './GraficaDash.js';
 
 
 
@@ -16,6 +18,8 @@ const Home = () => {
   const apikey = localStorage.getItem('apiKey');
   const idUser = localStorage.getItem('id');
 
+  const personas = useSelector(state => state.personas.personas)
+  const departamentos = useSelector(state => state.departamentos.departamentos)
 
   useEffect(() => {
     if (!apikey || apikey === 'undefined') navigate('/');
@@ -23,6 +27,7 @@ const Home = () => {
     obtenerCiudadesTodas();
     obtenerOcupaciones();
     obtenerPersonas();
+
   }, [])
 
 
@@ -134,7 +139,6 @@ const Home = () => {
 
 
 
-
   function CerrarSesion() {
     localStorage.clear();
     window.location.replace('/');
@@ -142,20 +146,20 @@ const Home = () => {
 
   return (
     <>
-     
 
-          <Link to='/ListadoPersonas'><button className="btn btn-primary w-100 py-2">Listado Personas</button></Link>
-          <br />
-          <Link to='/RegistroPersona'><button className="btn btn-primary w-100 py-2">Censar Persona</button></Link>
-          <br />
-          <Link to='/' onClick={CerrarSesion}><button className="btn btn-primary w-100 py-2">Cerrar Sesion</button></Link>
-          <br/>
-          <GraficaDash/>
-        </>
-        );
+
+      <Link to='/ListadoPersonas'><button className="btn btn-primary w-100 py-2">Listado Personas</button></Link>
+      <br />
+      <Link to='/RegistroPersona'><button className="btn btn-primary w-100 py-2">Censar Persona</button></Link>
+      <br />
+      <Link to='/' onClick={CerrarSesion}><button className="btn btn-primary w-100 py-2">Cerrar Sesion</button></Link>
+      <br />
+      <GraficaDash></GraficaDash>
+    </>
+  );
 }
 
 
 
 
-        export default Home
+export default Home

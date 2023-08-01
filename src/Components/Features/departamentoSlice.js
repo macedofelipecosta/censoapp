@@ -19,7 +19,8 @@ export const departamentoSlice = createSlice({
         },
         resetearDepartamento:(state)=>{
             state.departamento=[]
-        }
+        },
+        
     }
 })
 

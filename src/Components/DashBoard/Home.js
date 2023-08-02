@@ -8,6 +8,7 @@ import { guardarPersonas } from '../Features/personaSlice';
 
 
 import GraficaDash from './GraficaDash.js';
+import Mapa from './Mapa';
 
 
 
@@ -155,6 +156,7 @@ const Home = () => {
       <Link to='/' onClick={CerrarSesion}><button className="btn btn-primary w-100 py-2">Cerrar Sesion</button></Link>
       <br />
       <GraficaDash></GraficaDash>
+      <Mapa></Mapa>
     </>
   );
 }

@@ -21,12 +21,11 @@ export const personaSlice = createSlice({
             state.persona.push(action.payload)
         },
         eliminarPersona: (state, action) => {
-            // Buscar el índice del objeto con el ID dado
-            const index = state.personas.findIndex(obj => obj.id === action.payload);
+            const ind=state.personas.indexOf(p=>p['id']===action.payload)
+            const index = state.personas.findIndex(p => p['id'] === action.payload);
 
-            // Si el índice no es -1, significa que encontramos el objeto
-            if (index !== -1) {
-                // Eliminamos el objeto del array usando splice()
+            if (ind !== -1) {
+            
                 state.personas.splice(index, 1);
             }
         }

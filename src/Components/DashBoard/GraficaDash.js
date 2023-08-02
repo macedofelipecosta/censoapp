@@ -38,10 +38,11 @@ const GraficaDash = () => {
 
 
     const departamentos = useSelector(state => state.departamentos.departamentos)
-
+    const ocupaciones=useSelector(state=>state.ocupaciones.ocupaciones)
     const personas = useSelector(state => state.personas.personas)
 
     return (
+        <div>
         <Bar options={options} data={{
             labels: departamentos.map(dep => [dep['nombre']]),
             datasets: [
@@ -52,6 +53,17 @@ const GraficaDash = () => {
                 },
             ],
         }} />
+        <Bar options={options} data={{
+            labels: ocupaciones.map(ocu => [ocu['ocupacion']]),
+            datasets: [
+                {
+                    label: 'Personas por ocupacion',
+                    data: personas.map(p=>1),
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                },
+            ],
+        }} />
+        </div>
     )
 }
 

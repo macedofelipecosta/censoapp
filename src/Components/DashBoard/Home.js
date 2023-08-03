@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import { guardarDepartamentos } from '../Features/departamentoSlice'
 import { guardarTodas } from '../Features/ciudadSlice.js'
@@ -9,6 +9,7 @@ import { setCensados } from '../Features/censadoSlice.js'
 
 import GraficaDash from './GraficaDash.js';
 import Mapa from './Mapa';
+import CensadosTotales from './CensadosTotales';
 
 
 
@@ -17,9 +18,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const apikey = localStorage.getItem('apiKey');
   const idUser = localStorage.getItem('id');
-
-  const personas = useSelector(state => state.personas.personas)
-  const departamentos = useSelector(state => state.departamentos.departamentos)
 
 
 
@@ -136,7 +134,7 @@ const Home = () => {
       })
       .catch(error => console.log('error', error));
   }
-  
+
   const totalCensados = () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -182,6 +180,7 @@ const Home = () => {
       <Link to='/' onClick={CerrarSesion}><button className="btn btn-primary w-100 py-2">Cerrar Sesion</button></Link>
       <br />
       <GraficaDash></GraficaDash>
+      <CensadosTotales></CensadosTotales>
       <Mapa></Mapa>
     </>
   );

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    total: 0
+    totalCenso: 0
 }
 
 
@@ -10,7 +10,7 @@ export const censadoSlice = createSlice({
     initialState,
     reducers: {
         setCensados: (state, action) => {
-            state.total = (action.payload)
+            state.totalCenso = (action.payload)
         }
     }
 })

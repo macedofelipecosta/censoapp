@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
     departamentos: [],
-    departamento: []
+    departamento: [],
+    
 }
+
 
 
 export const departamentoSlice = createSlice({
@@ -11,20 +14,20 @@ export const departamentoSlice = createSlice({
     initialState,
     reducers: {
         guardarDepartamentos: (state, action) => {
-                state.departamentos.push(action.payload)
+            state.departamentos.push(action.payload)
         },
         guardarDepartamento: (state, action) => {
-            state.departamento=[]
+            state.departamento = []
             state.departamento.push(action.payload)
         },
-        resetearDepartamento:(state)=>{
-            state.departamento=[]
-        },
-        
+        resetearDepartamento: (state) => {
+            state.departamento = []
+        }
+
     }
 })
 
-export const { guardarDepartamentos,guardarDepartamento,resetearDepartamento } = departamentoSlice.actions;
+export const { guardarDepartamentos, guardarDepartamento, resetearDepartamento } = departamentoSlice.actions;
 export default departamentoSlice.reducer;
 
 

@@ -77,7 +77,6 @@ const RegistroPersona = () => {
 
     return (
         <form onSubmit={registrarPersona}>
-            <Link to='/Home'><button className="btn btn-primary w-100 py-2">Cancelar</button></Link>
             <h1 className="h3 mb-3 fw-normal" >Registro de persona</h1>
             <Nombre obtenerNombre={obtenerNombre} />
             <Departamentos />

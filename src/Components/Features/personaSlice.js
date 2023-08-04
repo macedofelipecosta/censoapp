@@ -25,7 +25,6 @@ export const personaSlice = createSlice({
             const index = state.personas.findIndex(p => p['id'] === action.payload);
 
             if (ind !== -1) {
-            
                 state.personas.splice(index, 1);
             }
         }

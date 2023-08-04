@@ -10,8 +10,9 @@ import { setCensados } from '../Features/censadoSlice.js'
 import GraficaDash from './GraficaDash.js';
 import Mapa from './Mapa';
 import CensadosTotales from './CensadosTotales';
-
-
+import ListadoPersonas from '../Personas/ListadoPersonas.js'
+import RegistroPersona from '../RegistroPersona/RegistroPersona.js'
+import CensoMvdInt from './CensoMvdInt';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -172,16 +173,20 @@ const Home = () => {
   return (
     <>
 
-
-      <Link to='/ListadoPersonas'><button className="btn btn-primary w-100 py-2">Listado Personas</button></Link>
       <br />
-      <Link to='/RegistroPersona'><button className="btn btn-primary w-100 py-2">Censar Persona</button></Link>
+      <RegistroPersona />
       <br />
-      <Link to='/' onClick={CerrarSesion}><button className="btn btn-primary w-100 py-2">Cerrar Sesion</button></Link>
+      <ListadoPersonas />
+      <br />
+      <CensoMvdInt />
       <br />
       <GraficaDash></GraficaDash>
+
       <CensadosTotales></CensadosTotales>
-      <Mapa></Mapa>
+
+      <Mapa />
+
+      <Link to='/' onClick={CerrarSesion}><button className="btn btn-danger w-100 py-2">Cerrar Sesion</button></Link>
     </>
   );
 }

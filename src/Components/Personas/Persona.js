@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
 import { eliminarPersona } from '../Features/personaSlice.js'
 
 const Persona = ({ id, nombre, departamento, ciudad, ocupacion }) => {
@@ -10,7 +8,8 @@ const Persona = ({ id, nombre, departamento, ciudad, ocupacion }) => {
   const idUser = localStorage.getItem('id');
 
   const departamentos = useSelector(state => state.departamentos.departamentos)
- 
+  const ciudadesTodas = useSelector(state => state.ciudades.todas)
+  const ocupaciones = useSelector(state => state.ocupaciones.ocupaciones)
 
   const eliminar = (event) => {
     const user = event.target.value;
@@ -43,9 +42,9 @@ const Persona = ({ id, nombre, departamento, ciudad, ocupacion }) => {
   return (
     <tr>
       <th scope="row">{nombre}</th>
-      <td id={departamento}>{departamento}</td>
-      <td id={ciudad}>{ciudad}</td>
-      <td id={ocupacion}>{ocupacion}</td>
+      <td id={departamento}>{departamentos.map(d => { if (d.id === departamento) { return d.nombre } })}</td>
+      <td id={ciudad}>{ciudadesTodas.map(c => { if (c.id === ciudad) { return c.nombre } })}</td>
+      <td id={ocupacion}>{ocupaciones.map(o=>{if(o.id===ocupacion){return o.ocupacion}})}</td>
       <td><button id={id} value={id} onClick={eliminar}>Eliminar persona</button></td>
     </tr>
   )

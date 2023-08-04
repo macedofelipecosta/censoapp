@@ -15,7 +15,6 @@ const ListadoPersonas = () => {
     return (
 
         <div className="bd-example">
-            <Link to='/Home'><button className="btn btn-primary w-100 py-2">Cancelar</button></Link>
             <table className="table table-hover">
                 <thead>
                     <tr>

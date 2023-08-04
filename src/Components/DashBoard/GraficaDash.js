@@ -51,7 +51,7 @@ const GraficaDash = () => {
 
 
     return (
-        <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel" >
             <div className="carousel-inner">
                 <div className="carousel-item active" >
                     <Bar className="class=d-block w-100" options={options} data={{

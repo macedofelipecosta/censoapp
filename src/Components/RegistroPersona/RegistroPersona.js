@@ -4,11 +4,11 @@ import Departamentos from './Departamentos'
 import Nacimiento from './Nacimiento'
 import Ocupaciones from './Ocupaciones'
 import Ciudades from './Ciudades'
+import { guardarPersonas } from '../Features/personaSlice.js'
 
-
-import {  useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+
 
 
 
@@ -16,12 +16,12 @@ import { Link } from 'react-router-dom'
 
 const RegistroPersona = () => {
 
-
+    const dispatch = useDispatch();
     const apikey = localStorage.getItem('apiKey');
     const idUser = localStorage.getItem('id');
-    
 
-    
+
+
 
     const [nombre, setNombre] = useState("")
     const [nacimiento, setNacimiento] = useState("")
@@ -56,6 +56,15 @@ const RegistroPersona = () => {
             "fechaNacimiento": nacimiento,
             "ocupacion": ocupacion[0]
         });
+        var usuario=({
+            "id": idUser,
+            "nombre": nombre,
+            "departamento": departamento[0],
+            "ciudad": ciudad[0],
+            "fechaNacimiento": nacimiento,
+            "ocupacion": ocupacion[0],
+            "idUsuario": idUser
+        })
 
         var requestOptions = {
             method: 'POST',
@@ -68,25 +77,35 @@ const RegistroPersona = () => {
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result)
-                alert(result['mensaje'])
-                window.location.replace('/Home');
+                dispatch(guardarPersonas(usuario))
+                console.log(result)
             })
             .catch(error => console.log('error', error));
     }
 
 
     return (
-        <form onSubmit={registrarPersona}>
-            <h1 className="h3 mb-3 fw-normal" >Registro de persona</h1>
-            <Nombre obtenerNombre={obtenerNombre} />
-            <Departamentos />
-            <Ciudades />
-            <Nacimiento obtenerNacimiento={obtenerNacimiento} />
-            <Ocupaciones />
+        <div style={{
+            textAlign: "center",
+            maxWidth: "700px",
+            margin: "0 auto",
+            border: "1px solid #e6e6e6",
+            padding: "40px 25px",
+            marginTop: "50px"
 
-            <button className="btn btn-primary w-100 py-2" type="submit" >Registrar</button>
+        }}>
+            <form onSubmit={registrarPersona}>
+                <h1 className="h3 mb-3 fw-normal" >Registro de persona</h1>
+                <Nombre obtenerNombre={obtenerNombre} />
+                <Departamentos />
+                <Ciudades />
+                <Nacimiento obtenerNacimiento={obtenerNacimiento} />
+                <Ocupaciones />
 
-        </form>
+                <button className="btn btn-primary w-100 py-2" type="submit" >Registrar</button>
+
+            </form>
+        </div>
     )
 }
 

@@ -45,7 +45,7 @@ const Persona = ({ id, nombre, departamento, ciudad, ocupacion }) => {
       <td id={departamento}>{departamentos.map(d => { if (d.id === departamento) { return d.nombre } })}</td>
       <td id={ciudad}>{ciudadesTodas.map(c => { if (c.id === ciudad) { return c.nombre } })}</td>
       <td id={ocupacion}>{ocupaciones.map(o=>{if(o.id===ocupacion){return o.ocupacion}})}</td>
-      <td><button id={id} value={id} onClick={eliminar}>Eliminar persona</button></td>
+      <td><button id={id} value={id} className="btn btn-danger w-100 py-2" onClick={eliminar}>Eliminar persona</button></td>
     </tr>
   )
 }

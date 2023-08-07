@@ -1,16 +1,7 @@
 import React from 'react'
 import Personas from './Personas'
-import { Link } from 'react-router-dom'
-
-
-
-
-
 
 const ListadoPersonas = () => {
-
-
-
 
     return (
 

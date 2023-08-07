@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { guardarDepartamentos } from '../Features/departamentoSlice'
 import { guardarTodas } from '../Features/ciudadSlice.js'
 import { guardarOcupaciones } from '../Features/ocupacionesSlice.js'
@@ -20,11 +20,11 @@ const Home = () => {
   const dispatch = useDispatch();
   const apikey = localStorage.getItem('apiKey');
   const idUser = localStorage.getItem('id');
-
+  
 
 
   useEffect(() => {
-    if (!apikey || apikey === 'undefined') navigate('/');
+    if (!apikey || apikey === 'undefined' || apikey===null) navigate('/');
     obtenerDepartamentos();
     obtenerCiudadesTodas();
     obtenerOcupaciones();
@@ -163,60 +163,13 @@ const Home = () => {
   }
 
 
-  const limite = new Date('2023-08-31T23:59:59').getTime();
 
 
-  function CerrarSesion() {
-    localStorage.clear();
-    window.location.replace('/');
-  };
+
 
   return (
     <div>
 
-      <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style={{width: '280px'}}>
-        <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <span className="fs-4">Menu</span>
-        </a>
-        <hr />
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">
-            <a href="#" className="nav-link active" aria-current="page">
-              Inicio
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link link-body-emphasis">
-              Censar persona
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link link-body-emphasis">
-              Grafica lineal
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link link-body-emphasis">
-              Lista de censados
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link link-body-emphasis">
-              Grafica circular
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link link-body-emphasis">
-              Mapa de censados
-            </a>
-          </li>
-          <li>
-          <Link to='/' onClick={CerrarSesion}><button className="btn btn-danger w-100 py-2">Cerrar Sesion</button></Link>
-          </li>
-        </ul>
-        <hr />
-       
-      </div>
 
       <div style={{
         textAlign: "center",
@@ -227,7 +180,7 @@ const Home = () => {
         marginTop: "50px"
 
       }}>
-        <Contador fechaLimite={limite} />
+        <Contador />
         <br />
         <RegistroPersona />
         <br />
@@ -270,7 +223,7 @@ const Home = () => {
           <Mapa />
         </div>
 
-        
+
       </div>
     </div>
   );

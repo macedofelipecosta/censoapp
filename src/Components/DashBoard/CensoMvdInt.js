@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 const CensoMvdInt = () => {
@@ -7,6 +7,7 @@ const CensoMvdInt = () => {
 
 
     useEffect(() => {
+
         personasMvd();
         personasInt();
     }, [personas])
@@ -14,23 +15,23 @@ const CensoMvdInt = () => {
 
     const personasMvd = () => {
 
-        let cantidad = 0;
+        let cantidadMvd = 0;
         personas.map(p => {
             if (p.departamento === 3218) {
-                cantidad++
+                cantidadMvd++
             }
         })
-        return cantidad
+        return cantidadMvd
     }
     const personasInt = () => {
 
-        let cantidad = 0;
+        let cantidadInt = 0;
         personas.map(p => {
             if (p.departamento !== 3218) {
-                cantidad++
+                cantidadInt++
             }
         })
-        return cantidad
+        return cantidadInt
     }
 
 
@@ -44,6 +45,7 @@ const CensoMvdInt = () => {
             marginTop: "50px"
 
         }}>
+
             <p>Censados Montevideo:{personasMvd()}</p>
             <br />
             <p>Censados interior:{personasInt()}</p>

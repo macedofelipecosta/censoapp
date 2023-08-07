@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 
 
-const Contador = ({ fechaLimite }) => {
+const Contador = () => {
+
+    var limite = new Date('2023-08-31T23:59:59').getTime();
     const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
     useEffect(() => {
         const intervalId = setInterval(() => {
             const now = new Date().getTime();
-            const diff = fechaLimite - now;
+            const diff = limite - now;
             if (diff > 0) {
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -24,7 +26,7 @@ const Contador = ({ fechaLimite }) => {
         return () => {
             clearInterval(intervalId);
         };
-    }, [fechaLimite]);
+    }, [limite]);
 
     return (
         <div style={{
@@ -36,7 +38,7 @@ const Contador = ({ fechaLimite }) => {
             marginTop: "50px"
         }}>
             <p>Tiempo restante para finalizar el censo:</p>
-            <p>Dias: {timeRemaining.days}, Horas: {timeRemaining.hours}, Minutos: {timeRemaining.minutes} </p>
+            <p>Dias: {timeRemaining.days}</p>
         </div>
     );
 };

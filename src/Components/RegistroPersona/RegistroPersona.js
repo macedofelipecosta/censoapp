@@ -63,7 +63,7 @@ const RegistroPersona = () => {
             "ciudad": ciudad[0],
             "fechaNacimiento": nacimiento,
             "ocupacion": ocupacion[0],
-            "idUsuario": idUser
+            "idUsuario": +idUser
         })
 
         var requestOptions = {
@@ -77,6 +77,7 @@ const RegistroPersona = () => {
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result)
+                usuario.id=result.idCenso
                 dispatch(guardarPersonas(usuario))
                 console.log(result)
             })

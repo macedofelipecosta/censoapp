@@ -82,7 +82,7 @@ const GraficaDash = () => {
                                 data: ocupaciones.map(o => {
                                     let personasOcup = 0
                                     personas.map(p => {
-                                        if (p.ocupacion == o.id) {
+                                        if (p.ocupacion === o.id) {
                                             personasOcup++
                                         }
                                     })

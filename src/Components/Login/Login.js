@@ -21,12 +21,10 @@ const Login = () => {
   }
 
   useEffect(() => {
-    verificarSesion();
+    if (localStorage.length==2) navigate('/Home');
   },[] )
 
-  const verificarSesion=()=>{
-    if (localStorage.length==2) navigate('/Home');
-  }
+  
   
 
   const InicioSesion = (event) => {

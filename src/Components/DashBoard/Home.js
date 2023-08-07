@@ -225,6 +225,7 @@ const Home = () => {
 
 
       </div>
+      <Link to='/' onClick={CerrarSesion}><button className="btn btn-danger w-100 py-2">Cerrar Sesion</button></Link>
     </div>
   );
 }

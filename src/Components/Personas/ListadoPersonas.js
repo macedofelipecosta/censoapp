@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Personas from './Personas'
+import FiltroOcupacion from './FiltroOcupacion'
 
 const ListadoPersonas = () => {
+    const [ocupacion, setOcupacion] = useState('')
+
+    const ocupacionFltr = (ocup) => {
+        setOcupacion(ocup);
+    }
+
+    const filtrado = () => {
+
+    }
 
     return (
 
         <div className="bd-example"  >
-            <table className="table table-hover" style={{
-                textAlign: "center",
-                maxWidth: "700px",
-                margin: "0 auto",
-                border: "1px solid #e6e6e6",
-                padding: "40px 25px",
-                marginTop: "50px"
-
-            }}>
+            <FiltroOcupacion ocupacionFltr={ocupacionFltr}></FiltroOcupacion>
+            <table className="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
@@ -23,7 +26,7 @@ const ListadoPersonas = () => {
                         <th scope='col'>Ocupacion</th>
                     </tr>
                 </thead>
-                <Personas />
+                <Personas idOcupacion={ocupacion} />
             </table>
         </div>
     )

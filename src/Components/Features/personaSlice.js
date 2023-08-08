@@ -21,7 +21,14 @@ export const personaSlice = createSlice({
             state.persona.push(action.payload)
         },
         eliminarPersona: (state, action) => {
-            state.personas = state.personas.filter(p => p.id !== +action.payload)
+            const personaId = +action.payload;
+            const index = state.personas.findIndex(p => p.id === personaId);
+
+            if (index !== -1) {
+                state.personas.splice(index, 1);
+            }
+
+            // state.personas = state.personas.filter(p => p.id !== +action.payload)
         }
     }
 })

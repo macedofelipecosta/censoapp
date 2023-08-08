@@ -13,7 +13,15 @@ const CensadosTotales = () => {
 
 
     return (
-        <div >
+        <div style={{
+            textAlign: "center",
+            maxWidth: "700px",
+            margin: "0 auto",
+            border: "1px solid #e6e6e6",
+            padding: "revert-layer",
+            marginTop: "50px"
+    
+          }} >
             <h1>Total censados / Censados por el usuario</h1>
             <Pie data={{
                 labels: ['Censados totales', 'Censados por el usuario'],

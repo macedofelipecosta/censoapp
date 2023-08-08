@@ -8,7 +8,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { useState } from 'react';
+
 
 import { Bar } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
@@ -43,19 +43,21 @@ const GraficaDash = () => {
     const departamentos = useSelector(state => state.departamentos.departamentos)
     const ocupaciones = useSelector(state => state.ocupaciones.ocupaciones)
     const personas = useSelector(state => state.personas.personas)
-
-
-
-
-
-
-
+    // departamentos.map(dep => [dep['nombre']])
     return (
         <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel" >
             <div className="carousel-inner">
                 <div className="carousel-item active" >
                     <Bar className="class=d-block w-100" options={options} data={{
-                        labels: departamentos.map(dep => [dep['nombre']]),
+                        labels: departamentos.map(d => {
+                            let depPersonas = []
+                            personas.map(p => {
+                                if (p.departamento === d.id) {
+                                    depPersonas.push(d.nombre)
+                                }
+                            })
+                            return depPersonas
+                        }),
                         datasets: [
                             {
                                 label: 'Personas por departamento',

@@ -3,13 +3,13 @@ import Persona from './Persona'
 
 import { useSelector } from 'react-redux'
 
-const Personas = () => {
+const Personas = ({ idOcupacion }) => {
 
   const personas = useSelector(state => state.personas.personas)
 
   return (
     <tbody>
-      {personas.map(p => <Persona key={'per' + p['id']} {...p} />)}
+    {idOcupacion!=='Ocupaciones'?personas.map(p => p.ocupacion === +idOcupacion ? <Persona key={'per' + p['id']} {...p} /> :null):<tr><td><th scope="row">No se han encontrado personas con esa ocupacion</th></td></tr>}
     </tbody>
   )
 }

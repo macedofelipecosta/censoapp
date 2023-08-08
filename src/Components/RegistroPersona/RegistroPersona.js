@@ -39,7 +39,21 @@ const RegistroPersona = () => {
 
     }
 
+    const getEdad = () => {
 
+        var fechaNacimiento = new Date(nacimiento);
+        var fechaActual = new Date();
+
+        // Calcular la diferencia en milisegundos entre las dos fechas
+        var diferenciaMilisegundos = fechaActual - fechaNacimiento;
+
+        // Calcular la diferencia en años
+        var edad = diferenciaMilisegundos / (1000 * 60 * 60 * 24 * 365.25); // Aproximadamente, considerando años bisiestos
+
+        // Redondear hacia abajo para obtener la edad entera
+
+        return Math.floor(edad);
+    }
 
     const registrarPersona = (event) => {
         event.preventDefault();
@@ -56,13 +70,13 @@ const RegistroPersona = () => {
             "fechaNacimiento": nacimiento,
             "ocupacion": ocupacion[0]
         });
-        var usuario=({
-            "id": idUser,
+        var usuario = ({
+            "id": +idUser,
             "nombre": nombre,
-            "departamento": departamento[0],
-            "ciudad": ciudad[0],
+            "departamento": +departamento[0],
+            "ciudad": +ciudad[0],
             "fechaNacimiento": nacimiento,
-            "ocupacion": ocupacion[0],
+            "ocupacion": +ocupacion[0],
             "idUsuario": +idUser
         })
 
@@ -77,7 +91,7 @@ const RegistroPersona = () => {
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result)
-                usuario.id=result.idCenso
+                usuario.id = result.idCenso
                 dispatch(guardarPersonas(usuario))
                 console.log(result)
             })
@@ -101,7 +115,7 @@ const RegistroPersona = () => {
                 <Departamentos />
                 <Ciudades />
                 <Nacimiento obtenerNacimiento={obtenerNacimiento} />
-                <Ocupaciones />
+                <Ocupaciones getEdad={getEdad} />
 
                 <button className="btn btn-primary w-100 py-2" type="submit" >Registrar</button>
 

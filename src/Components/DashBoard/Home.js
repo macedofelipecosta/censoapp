@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { guardarDepartamentos } from '../Features/departamentoSlice'
 import { guardarTodas } from '../Features/ciudadSlice.js'
 import { guardarOcupaciones } from '../Features/ocupacionesSlice.js'
@@ -24,7 +24,7 @@ const Home = () => {
 
 
   useEffect(() => {
-    if (!apikey || apikey === 'undefined' || apikey===null) navigate('/');
+    if (apikey===null) navigate('/');
     obtenerDepartamentos();
     obtenerCiudadesTodas();
     obtenerOcupaciones();
@@ -34,6 +34,11 @@ const Home = () => {
 
 
 
+  function CerrarSesion() {
+    localStorage.clear();
+    navigate('/');
+    window.location.replace('/');
+  };
 
 
   const obtenerDepartamentos = () => {
@@ -166,36 +171,26 @@ const Home = () => {
 
 
 
-
   return (
-    <div>
+    <div style={{
+      textAlign: "center",
+      maxWidth: "700px",
+      margin: "0 auto",
+      border: "1px solid #e6e6e6",
+      padding: "revert-layer",
+      marginTop: "50px"
+
+    }} >
 
 
-      <div style={{
-        textAlign: "center",
-        maxWidth: "700px",
-        margin: "0 auto",
-        border: "1px solid #e6e6e6",
-        padding: "revert-layer",
-        marginTop: "50px"
-
-      }}>
+      <div>
         <Contador />
         <br />
         <RegistroPersona />
         <br />
         <CensoMvdInt />
         <br />
-        <div style={{
-          textAlign: "center",
-          maxWidth: "700px",
-          margin: "0 auto",
-          border: "1px solid #e6e6e6",
-          padding: "revert-layer",
-          marginTop: "50px",
-          display: 'grid'
-
-        }}>
+        <div>
           <GraficaDash></GraficaDash>
           <ListadoPersonas />
         </div>

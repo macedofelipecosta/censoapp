@@ -9,7 +9,7 @@ const Personas = ({ idOcupacion }) => {
 
   return (
     <tbody>
-    {idOcupacion!=='Ocupaciones'?personas.map(p => p.ocupacion === +idOcupacion ? <Persona key={'per' + p['id']} {...p} /> :null):<tr><td><th scope="row">No se han encontrado personas con esa ocupacion</th></td></tr>}
+    {idOcupacion!=='Ocupaciones'? personas.filter(p=>p.ocupacion===+idOcupacion).length>=1?personas.filter(p=>p.ocupacion===+idOcupacion).map(x=><Persona key={'per' + x['id']} {...x} />):<tr><td>No se han encontrado personas con esa ocupacion</td></tr>:<tr><td>No se han encontrado personas con esa ocupacion</td></tr>}
     </tbody>
   )
 }
